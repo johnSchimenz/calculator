@@ -4,7 +4,7 @@ let operator = "";
 let nextNumber = "";
 let runningTotal = 0;
 let previousOperator = "";
-let currentOperator = "";
+let currentOperator = "+";
 const buttonDisplay = document.querySelector("#display");
 const buttonsDigits = document.querySelectorAll("button.digit");
 const buttonDecimal = document.querySelector("#decimal");
@@ -17,10 +17,11 @@ buttonsOperators.forEach((button) =>
 {
     button.addEventListener("click", () =>
     {
-        
-        operator = button.textContent;
-        console.log("the operator is " + operator);
-        runningTotal = operate(runningTotal, operator, nextNumber);
+        previousOperator = currentOperator;
+        currentOperator = button.textContent;
+
+        console.log("the previousOperator is " + previousOperator);
+        runningTotal = operate(runningTotal, previousOperator, nextNumber);
         
         console.log("runningTotal is " + runningTotal);
         return runningTotal;
