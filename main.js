@@ -17,7 +17,11 @@ buttonsOperators.forEach((button) =>
 {
     button.addEventListener("click", () =>
     {
-        runningTotal = runningTotal + nextNumber;
+        
+        operator = button.textContent;
+        console.log("the operator is " + operator);
+        runningTotal = operate(runningTotal, operator, nextNumber);
+        
         console.log("runningTotal is " + runningTotal);
         return runningTotal;
     });
