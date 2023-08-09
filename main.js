@@ -17,7 +17,9 @@ buttonsOperators.forEach((button) =>
 {
     button.addEventListener("click", () =>
     {
-
+        runningTotal = runningTotal + nextNumber;
+        console.log("runningTotal is " + runningTotal);
+        return runningTotal;
     });
 });
 
@@ -27,7 +29,8 @@ buttonsDigits.forEach((button) =>
     button.addEventListener("click", () =>
     {
         nextNumber = button.textContent;
-        console.log(nextNumber);
+        console.log("nextNumber is " + nextNumber);
+        nextNumber = Number(nextNumber);
         return nextNumber;
     });
 });
