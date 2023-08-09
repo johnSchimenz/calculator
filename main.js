@@ -12,7 +12,7 @@ const buttonClear = document.querySelector("#clear");
 const buttonEquals = document.querySelector("#equals"); // Need to finish this "click" steps
 const buttonsOperators = document.querySelectorAll("button.operator");
 
-// IN PROGRESS
+// Done
 buttonsOperators.forEach((button) =>
 {
     button.addEventListener("click", () =>
@@ -28,7 +28,7 @@ buttonsOperators.forEach((button) =>
     });
 });
 
-// What happens on button click - IN PROGRESS
+// What happens on button click - IN PROGRESS - only works for single digits currently
 buttonsDigits.forEach((button) =>
 {
     button.addEventListener("click", () =>
@@ -41,7 +41,7 @@ buttonsDigits.forEach((button) =>
 });
 
 
-// DONE
+// DONE? (need to check cases)
 buttonDecimal.addEventListener("click", () =>
 {
     // display puts on a decimal if none currently written, but if there is one, nothing happens
