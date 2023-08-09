@@ -12,41 +12,32 @@ const buttonClear = document.querySelector("#clear");
 const buttonEquals = document.querySelector("#equals"); // Need to finish this "click" steps
 const buttonsOperators = document.querySelectorAll("button.operator");
 
-// Done
+// DONE
 buttonsOperators.forEach((button) =>
 {
     button.addEventListener("click", () =>
     {
         previousOperator = currentOperator;
         currentOperator = button.textContent;
-
-        console.log("the previousOperator is " + previousOperator);
         runningTotal = operate(runningTotal, previousOperator, nextNumber);
-        
-        console.log("runningTotal is " + runningTotal);
-
         nextNumber = "";
-
-        console.log("refreshed next number is " + nextNumber);
-
         return runningTotal;
     });
 });
 
-// What happens on button click - IN PROGRESS - only works for single digits currently
+// DONE
 buttonsDigits.forEach((button) =>
 {
     button.addEventListener("click", () =>
     {
         nextNumber = nextNumber + button.textContent;
-        console.log("nextNumber is " + nextNumber);
         nextNumber = Number(nextNumber);
         return nextNumber;
     });
 });
 
 
-// DONE? (need to check cases)
+// Does not work yet; don't worry until get everything else working
 buttonDecimal.addEventListener("click", () =>
 {
     // display puts on a decimal if none currently written, but if there is one, nothing happens
@@ -68,14 +59,16 @@ buttonClear.addEventListener("click", () =>
 })
 
 // Need to finish the "equals" steps below
-/*
 buttonEquals.addEventListener("click", () =>
 {
-    numberA = 
-    numberB = display;
-
+    previousOperator = currentOperator;
+    runningTotal = operate(runningTotal, previousOperator, nextNumber);
+    nextNumber = "";
+    display = runningTotal;
+    runningTotal = 0;
+    return display;
 })
-*/
+
 
 // Perform operation - functions work by themselves
 function operate(numberA, operator, numberB)
