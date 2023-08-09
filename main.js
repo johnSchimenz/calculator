@@ -1,10 +1,10 @@
 // Variable declarations
-let numberA;
+let display = "";
+let numberA = display;
 let operator = "";
 let numberB;
-let display = 0;
 let operatorCounter = 0;
-let arrayInputs = [numberA, numberB];
+let runningTotal = 0;
 const buttonDisplay = document.querySelector("#display");
 const buttonsDigits = document.querySelectorAll("button.digit");
 const buttonDecimal = document.querySelector("#decimal");
@@ -12,7 +12,7 @@ const buttonClear = document.querySelector("#clear");
 const buttonEquals = document.querySelector("#equals"); // Need to finish this "click" steps
 const buttonsOperators = document.querySelectorAll("button.operator");
 
-// What happens on button click - IN PROGRESS
+// What happens on button click - MOSTLY DONE (still need to link it to the display)
 buttonsDigits.forEach((button) =>
 {
     button.addEventListener("click", () =>
@@ -27,19 +27,20 @@ buttonsDigits.forEach((button) =>
         {
             display = display + button.textContent;
             console.log(display);
-            return (display);            
+            return display;            
         }
 
     })
 })
 
-//DONE
+// DONE
 buttonDecimal.addEventListener("click", () =>
 {
     if (display.includes(".") === false)
     {
         display = display + ".";
         console.log(display);
+        return display;
     }
 })
 
@@ -51,19 +52,21 @@ buttonsOperators.forEach((button) =>
         operatorCounter++;
         if (operatorCounter === 1)
         {
-            numberB = display;
+            numberA = Number(display);
+            console.log(numberA);
         }
-        
         else if (operatorCounter > 1)
         {
-            numberA = numberB;
-            numberB = display;
-            operator = button.textContent;
-            operate(numberA, numberB, operator);
+            numberB = Number(display);
 
         }
-    })
-})
+        numberA = Number(display);
+        numberA = numberB;
+        operator = button.textContent;
+        console.log(button.textContent);
+        console.log(operate(numberA, numberB, operator));
+    });
+});
 
 
 //DONE
@@ -83,7 +86,7 @@ buttonEquals.addEventListener("click", () =>
 })
 */
 
-// Perform operation
+// Perform operation - functions work by themselves
 function operate(numberA, numberB, operator)
 {
     if (operator === "+")
@@ -104,7 +107,7 @@ function operate(numberA, numberB, operator)
     }
 }
 
-// Operator functions
+// Operator functions - functions work by themselves
 function add (numberA, numberB)
 {
     return numberA + numberB;
