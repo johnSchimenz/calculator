@@ -1,11 +1,10 @@
 // Variable declarations
 let display = "";
-let numberA = display;
 let operator = "";
-let numberB; // numberB is equal to "undefined"
-let operatorCounter = 0;
+let nextNumber = "";
 let runningTotal = 0;
-let readyForNextNumber = true;
+let previousOperator = "";
+let currentOperator = "";
 const buttonDisplay = document.querySelector("#display");
 const buttonsDigits = document.querySelectorAll("button.digit");
 const buttonDecimal = document.querySelector("#decimal");
@@ -18,22 +17,18 @@ buttonsOperators.forEach((button) =>
 {
     button.addEventListener("click", () =>
     {
-        readyForNextNumber = true;
-        runningTotal = Number(display);
-        console.log(runningTotal);
-        return runningTotal;
+
     });
 });
 
-// What happens on button click - MOSTLY DONE (still need to link it to the display)
+// What happens on button click - IN PROGRESS
 buttonsDigits.forEach((button) =>
 {
     button.addEventListener("click", () =>
     {
-        readyForNextNumber = false;
-        display = display + button.textContent;
-        console.log(display);
-        return display;            
+        nextNumber = button.textContent;
+        console.log(nextNumber);
+        return nextNumber;
     });
 });
 
@@ -41,7 +36,8 @@ buttonsDigits.forEach((button) =>
 // DONE
 buttonDecimal.addEventListener("click", () =>
 {
-    readyForNextNumber = false;
+    // display puts on a decimal if none currently written, but if there is one, nothing happens
+    // return nextNumber
     if (display.includes(".") === false)
     {
         display = display + ".";
@@ -54,7 +50,6 @@ buttonDecimal.addEventListener("click", () =>
 buttonClear.addEventListener("click", () => 
 {
     display = "";
-    readyForNextNumber = true;
     console.log(display);
     
 })
@@ -69,8 +64,8 @@ buttonEquals.addEventListener("click", () =>
 })
 */
 
-// Perform operation - IN PROGRESS - have to wait for numberB to be inputted
-function operate(numberA, numberB, operator)
+// Perform operation - functions work by themselves
+function operate(numberA, operator, numberB)
 {
     if (operator === "+")
     {
