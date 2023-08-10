@@ -18,10 +18,8 @@ buttonsOperators.forEach((button) =>
     button.addEventListener("click", () =>
     {
         previousOperator = currentOperator;
-        console.log(previousOperator);
         currentOperator = button.textContent;
         runningTotal = operate(runningTotal, previousOperator, nextNumber);
-        console.log(runningTotal);
         nextNumber = "";
         displayCalculator.textContent = runningTotal;
         return runningTotal;
@@ -35,7 +33,6 @@ buttonsDigits.forEach((button) =>
     {
         nextNumber = nextNumber + button.textContent;
         nextNumber = Number(nextNumber);
-        console.log(nextNumber);
         displayCalculator.textContent = nextNumber;
         return nextNumber;
     });
@@ -50,7 +47,6 @@ buttonDecimal.addEventListener("click", () =>
     if (display.includes(".") === false)
     {
         display = display + ".";
-        console.log(display);
         return display;
     }
 })
@@ -74,7 +70,6 @@ buttonEquals.addEventListener("click", () =>
     runningTotal = operate(runningTotal, previousOperator, nextNumber);
     nextNumber = "";
     display = runningTotal;
-    console.log(display);
     runningTotal = 0;
     displayCalculator.textContent = display;
     return display;
