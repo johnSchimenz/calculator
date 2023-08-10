@@ -5,7 +5,7 @@ let nextNumber = "";
 let runningTotal = 0;
 let previousOperator = "";
 let currentOperator = "+";
-const buttonDisplay = document.querySelector("#display");
+const displayCalculator = document.querySelector("#display");
 const buttonsDigits = document.querySelectorAll("button.digit");
 const buttonDecimal = document.querySelector("#decimal");
 const buttonClear = document.querySelector("#clear");
@@ -23,6 +23,7 @@ buttonsOperators.forEach((button) =>
         runningTotal = operate(runningTotal, previousOperator, nextNumber);
         console.log(runningTotal);
         nextNumber = "";
+        displayCalculator.textContent = runningTotal;
         return runningTotal;
     });
 });
@@ -35,6 +36,7 @@ buttonsDigits.forEach((button) =>
         nextNumber = nextNumber + button.textContent;
         nextNumber = Number(nextNumber);
         console.log(nextNumber);
+        displayCalculator.textContent = nextNumber;
         return nextNumber;
     });
 });
@@ -62,6 +64,7 @@ buttonClear.addEventListener("click", () =>
     runningTotal = 0;
     previousOperator = "";
     currentOperator = "+";
+    displayCalculator.textContent = 0;
 })
 
 // Need to finish the "equals" steps below
@@ -73,6 +76,7 @@ buttonEquals.addEventListener("click", () =>
     display = runningTotal;
     console.log(display);
     runningTotal = 0;
+    displayCalculator.textContent = display;
     return display;
 })
 
