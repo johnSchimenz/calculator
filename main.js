@@ -54,8 +54,11 @@ buttonDecimal.addEventListener("click", () =>
 buttonClear.addEventListener("click", () => 
 {
     display = "";
-    console.log(display);
-    
+    operator = "";
+    nextNumber = "";
+    runningTotal = 0;
+    previousOperator = "";
+    currentOperator = "+";
 })
 
 // Need to finish the "equals" steps below
