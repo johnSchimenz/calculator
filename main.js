@@ -84,20 +84,6 @@ buttonsOperators.forEach((button) =>
             nextNumber = "";
             return runningTotal;
         }
-
-        /*
-            previousOperator = currentOperator;
-            console.log("previousOperator is " + previousOperator);
-            currentOperator = button.textContent;
-            console.log("currentOperator is " + currentOperator);
-
-            runningTotal = operate(runningTotal, previousOperator, nextNumber);
-            nextNumber = "";
-            displayCalculator.textContent = runningTotal;
-            console.log("runningTotal is " + runningTotal);
-            return runningTotal;
-        }
-        */
     });
 });
 
