@@ -1,11 +1,10 @@
 // Variable declarations
 let display = "";
 let operator = "";
-let nextNumber = "";
 let runningTotal = 0;
+let nextNumber = "";
 let previousOperator = "";
 let currentOperator = "";
-let beginning = true; // This will be true if everything is cleared, but false once a value is typed in
 
 const displayCalculator = document.querySelector("#display");
 const buttonsDigits = document.querySelectorAll("button.digit");
@@ -19,7 +18,6 @@ buttonsDigits.forEach((button) =>
 {
     button.addEventListener("click", () =>
     {
-        beginning = false;
         nextNumber = nextNumber + button.textContent;
         nextNumber = Number(nextNumber);
         console.log("nextNumber is " + nextNumber);
@@ -28,32 +26,78 @@ buttonsDigits.forEach((button) =>
     });
 });
 
-// DONE
+// In progress
 buttonsOperators.forEach((button) =>
 {
     button.addEventListener("click", () =>
     {
-        if (beginning === true)
+        previousOperator = currentOperator;
+        console.log("previousOperator is " + previousOperator);
+        currentOperator = button.textContent;
+        console.log("currentOperator is " + currentOperator);
+
+        // previousOperator is "" (beginning) - DONE
+        if (previousOperator === "")
         {
-            runningTotal = 0;
+            runningTotal = nextNumber;
             displayCalculator.textContent = runningTotal;
             console.log("runningTotal is " + runningTotal);
-            currentOperator = button.textContent;
-            console.log("currentOperator is " + currentOperator);
+            nextNumber = String(nextNumber);
+            nextNumber = "";
             return runningTotal;
         }
-        else
+
+        // previousOperator is an operation and currentOperator is "=" - DONE
+        else if (previousOperator !== "=" && previousOperator !== "" && currentOperator === "=")
         {
+            runningTotal = operate(runningTotal, previousOperator, nextNumber);
+            displayCalculator.textContent = runningTotal;
+            console.log("runningTotal is " + runningTotal);
+            nextNumber = String(nextNumber);
+            nextNumber = "";
+            return runningTotal;
+        }
+        
+        // previousOperator is "=" and currentOperator is an operation - DONE
+        else if (previousOperator === "=" && currentOperator !== "=" && currentOperator !== "")
+        {
+            displayCalculator.textContent = runningTotal;
+            console.log("runningTotal is " + runningTotal);
+            return runningTotal;
+        }
+
+        // both previousOperator and currentOperator are both "=" - DONE
+        else if (previousOperator === "=" && currentOperator === "=")
+        {
+            displayCalculator.textContent = runningTotal;            
+            console.log("runningTotal is " + runningTotal);
+            return runningTotal;
+        }
+        
+        // two of the following operations: + - * / - DONE
+        else 
+        {
+            runningTotal = operate(runningTotal, previousOperator, nextNumber);
+            displayCalculator.textContent = runningTotal;
+            console.log("runningTotal is " + runningTotal);
+            nextNumber = String(nextNumber);
+            nextNumber = "";
+            return runningTotal;
+        }
+
+        /*
             previousOperator = currentOperator;
             console.log("previousOperator is " + previousOperator);
             currentOperator = button.textContent;
             console.log("currentOperator is " + currentOperator);
+
             runningTotal = operate(runningTotal, previousOperator, nextNumber);
             nextNumber = "";
             displayCalculator.textContent = runningTotal;
             console.log("runningTotal is " + runningTotal);
             return runningTotal;
         }
+        */
     });
 });
 
@@ -70,6 +114,7 @@ buttonDecimal.addEventListener("click", () =>
 })
 
 // Need to finish the "equals" steps below
+/*
 buttonEquals.addEventListener("click", () =>
 {
     previousOperator = currentOperator;
@@ -83,6 +128,7 @@ buttonEquals.addEventListener("click", () =>
     
     return display;
 })
+*/
 
 //DONE
 buttonClear.addEventListener("click", () => 
@@ -100,19 +146,19 @@ buttonClear.addEventListener("click", () =>
 // Perform operation - functions work by themselves
 function operate(numberA, operator, numberB)
 {
-    if (operator === "+" && beginning === false)
+    if (operator === "+")
     {
         return add(numberA, numberB);
     }
-    if (operator === "-" && beginning === false)
+    if (operator === "-")
     {
         return subtract(numberA, numberB);
     }
-    if (operator === "*" && beginning === false)
+    if (operator === "*")
     {
         return multiply(numberA, numberB);
     }
-    if (operator === "/" && beginning === false)
+    if (operator === "/")
     {
         return divide(numberA, numberB);
     }
