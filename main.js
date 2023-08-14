@@ -1,6 +1,5 @@
 // Variable declarations
 let display = "";
-let operator = "";
 let runningTotal = 0;
 let nextNumber = "";
 let previousOperator = "";
@@ -99,34 +98,15 @@ buttonDecimal.addEventListener("click", () =>
     }
 })
 
-// Need to finish the "equals" steps below
-/*
-buttonEquals.addEventListener("click", () =>
-{
-    previousOperator = currentOperator;
-    currentOperator = "+";
-    console.log("previousOperator is " + previousOperator);
-    runningTotal = operate(runningTotal, previousOperator, nextNumber);
-    console.log("runningTotal is " + runningTotal);
-    nextNumber = "";
-    display = runningTotal;
-    displayCalculator.textContent = display;
-    
-    return display;
-})
-*/
-
 //DONE
 buttonClear.addEventListener("click", () => 
 {
     display = "";
-    operator = "";
-    nextNumber = "";
     runningTotal = 0;
+    nextNumber = "";
     previousOperator = "";
     currentOperator = "";
-    displayCalculator.textContent = 0;
-    beginning = true;
+    displayCalculator.textContent = runningTotal;
 })
 
 // Perform operation - functions work by themselves
