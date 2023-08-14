@@ -4,8 +4,8 @@ let operator = "";
 let nextNumber = "";
 let runningTotal = 0;
 let previousOperator = "";
-let currentOperator = "+";
-let beginning = true;
+let currentOperator = "";
+let beginning = true; // This will be true if everything is cleared, but false once a value is typed in
 
 const displayCalculator = document.querySelector("#display");
 const buttonsDigits = document.querySelectorAll("button.digit");
@@ -15,31 +15,47 @@ const buttonEquals = document.querySelector("#equals"); // Need to finish this "
 const buttonsOperators = document.querySelectorAll("button.operator");
 
 // DONE
-buttonsOperators.forEach((button) =>
-{
-    button.addEventListener("click", () =>
-    {
-        previousOperator = currentOperator;
-        currentOperator = button.textContent;
-        runningTotal = operate(runningTotal, previousOperator, nextNumber);
-        nextNumber = "";
-        displayCalculator.textContent = runningTotal;
-        return runningTotal;
-    });
-});
-
-// DONE
 buttonsDigits.forEach((button) =>
 {
     button.addEventListener("click", () =>
     {
+        beginning = false;
         nextNumber = nextNumber + button.textContent;
         nextNumber = Number(nextNumber);
+        console.log("nextNumber is " + nextNumber);
         displayCalculator.textContent = nextNumber;
         return nextNumber;
     });
 });
 
+// DONE
+buttonsOperators.forEach((button) =>
+{
+    button.addEventListener("click", () =>
+    {
+        if (beginning === true)
+        {
+            runningTotal = 0;
+            displayCalculator.textContent = runningTotal;
+            console.log("runningTotal is " + runningTotal);
+            currentOperator = button.textContent;
+            console.log("currentOperator is " + currentOperator);
+            return runningTotal;
+        }
+        else
+        {
+            previousOperator = currentOperator;
+            console.log("previousOperator is " + previousOperator);
+            currentOperator = button.textContent;
+            console.log("currentOperator is " + currentOperator);
+            runningTotal = operate(runningTotal, previousOperator, nextNumber);
+            nextNumber = "";
+            displayCalculator.textContent = runningTotal;
+            console.log("runningTotal is " + runningTotal);
+            return runningTotal;
+        }
+    });
+});
 
 // Does not work yet; don't worry until get everything else working
 buttonDecimal.addEventListener("click", () =>
@@ -53,6 +69,21 @@ buttonDecimal.addEventListener("click", () =>
     }
 })
 
+// Need to finish the "equals" steps below
+buttonEquals.addEventListener("click", () =>
+{
+    previousOperator = currentOperator;
+    currentOperator = "+";
+    console.log("previousOperator is " + previousOperator);
+    runningTotal = operate(runningTotal, previousOperator, nextNumber);
+    console.log("runningTotal is " + runningTotal);
+    nextNumber = "";
+    display = runningTotal;
+    displayCalculator.textContent = display;
+    
+    return display;
+})
+
 //DONE
 buttonClear.addEventListener("click", () => 
 {
@@ -61,42 +92,27 @@ buttonClear.addEventListener("click", () =>
     nextNumber = "";
     runningTotal = 0;
     previousOperator = "";
-    currentOperator = "+";
+    currentOperator = "";
     displayCalculator.textContent = 0;
     beginning = true;
 })
 
-// Need to finish the "equals" steps below
-buttonEquals.addEventListener("click", () =>
-{
-    previousOperator = currentOperator;
-    currentOperator = "+";
-    console.log(previousOperator);
-    runningTotal = operate(runningTotal, previousOperator, nextNumber);
-    nextNumber = "";
-    display = runningTotal;
-    displayCalculator.textContent = display;
-    
-    return display;
-})
-
-
 // Perform operation - functions work by themselves
 function operate(numberA, operator, numberB)
 {
-    if (operator === "+")
+    if (operator === "+" && beginning === false)
     {
         return add(numberA, numberB);
     }
-    if (operator === "-")
+    if (operator === "-" && beginning === false)
     {
         return subtract(numberA, numberB);
     }
-    if (operator === "*")
+    if (operator === "*" && beginning === false)
     {
         return multiply(numberA, numberB);
     }
-    if (operator === "/")
+    if (operator === "/" && beginning === false)
     {
         return divide(numberA, numberB);
     }
