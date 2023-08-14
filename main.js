@@ -145,5 +145,10 @@ function multiply (numberA, numberB)
 
 function divide (numberA, numberB)
 {
-    return numberA / numberB;
+    result = numberA / numberB;
+    if (numberB === 0)
+    {
+        return "Error: Divide by Zero"
+    }
+    return result;
 }
