@@ -11,34 +11,49 @@ const lengthArrayDigitId = arrayDigitId.length;
 
 const displayCalculator = document.querySelector("#display");
 const buttonsDigits = document.querySelectorAll("button.digit");
-const buttonDecimal = document.querySelector("#decimal");
 const buttonClear = document.querySelector("#clear");
-const buttonEquals = document.querySelector("#equals"); // Need to finish this "click" steps
 const buttonsOperators = document.querySelectorAll("button.operator");
 
-// DONE
+// Digit buttons (0-9, .) instructions
 buttonsDigits.forEach((button) =>
 {
     button.addEventListener("click", () =>
     {
+        // Makes operators clickable
         for (let i = 0; i < lengthArrayOperatorId; i++)
         {
             document.querySelector(arrayOperatorId[i]).removeAttribute("disabled");
         }
-        nextNumber = nextNumber + button.textContent;
-        nextNumber = Number(nextNumber);
-        console.log("nextNumber is " + nextNumber);
+
+        // Allows user to use a decimal if no decimal is already included
+        // Then, solidifies the next number to be operated on
+        nextNumber = String(nextNumber);
+        let includesDecimal = nextNumber.includes(".");
+        if (includesDecimal === true && button.textContent === ".")
+        {
+            nextNumber = nextNumber;
+        }
+        else
+        {
+            nextNumber = nextNumber + button.textContent;
+        }
         displayCalculator.textContent = nextNumber;
         return nextNumber;
     });
 });
 
-// Semi-Done
+// Operator buttons (+, -, *, /, =) instructions
 buttonsOperators.forEach((button) =>
 {  
+    
+    // Makes operators unclickable at the beginning
     button.setAttribute("disabled", true);
+
     button.addEventListener("click", () =>
     {        
+        
+        nextNumber = Number(nextNumber);
+
         for (let i = 0; i < lengthArrayOperatorId; i++)
         {
             document.querySelector(arrayOperatorId[i]).setAttribute("disabled", true);
@@ -48,7 +63,7 @@ buttonsOperators.forEach((button) =>
         currentOperator = button.textContent;
         console.log("currentOperator is " + currentOperator);
 
-        // previousOperator is "" (beginning) - DONE
+        // previousOperator is "" in beginning
         if (previousOperator === "")
         {
             runningTotal = nextNumber;
@@ -59,7 +74,7 @@ buttonsOperators.forEach((button) =>
             return runningTotal;
         }
 
-        // previousOperator is an operation and currentOperator is "=" - DONE
+        // previousOperator is an operation and currentOperator is "="
         else if (previousOperator !== "=" && previousOperator !== "" && currentOperator === "=")
         {
             for (let i = 0; i < lengthArrayDigitId; i++)
@@ -73,39 +88,10 @@ buttonsOperators.forEach((button) =>
             nextNumber = "";
             return runningTotal;
         }
-        
-        /*
-        // previousOperator is "=" and currentOperator is an operation - DONE
-        else if (previousOperator === "=" && currentOperator !== "=" && currentOperator !== "")
-        {
-            displayCalculator.textContent = runningTotal;
-            console.log("runningTotal is " + runningTotal);
-            return runningTotal;
-        }
-
-        // both previousOperator and currentOperator are both "=" - DONE
-        else if (previousOperator === "=" && currentOperator === "=")
-        {
-            displayCalculator.textContent = runningTotal;            
-            console.log("runningTotal is " + runningTotal);
-            return runningTotal;
-        }
-        
-        // two of the following operations: + - * / - DONE
-        else 
-        {
-            runningTotal = operate(runningTotal, previousOperator, nextNumber);
-            displayCalculator.textContent = runningTotal;
-            console.log("runningTotal is " + runningTotal);
-            nextNumber = String(nextNumber);
-            nextNumber = "";
-            return runningTotal;
-        }
-        */
     });
 });
 
-// DONE
+// Clear "C" button instructions
 buttonClear.addEventListener("click", () => 
 {
     for (let i = 0; i < lengthArrayDigitId; i++)
@@ -120,7 +106,7 @@ buttonClear.addEventListener("click", () =>
     displayCalculator.textContent = runningTotal;
 })
 
-// Perform operation - DONE
+// Perform operation
 function operate(numberA, operator, numberB)
 {
     if (operator === "+")
