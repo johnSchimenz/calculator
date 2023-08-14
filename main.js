@@ -5,6 +5,8 @@ let nextNumber = "";
 let runningTotal = 0;
 let previousOperator = "";
 let currentOperator = "+";
+let beginning = true;
+
 const displayCalculator = document.querySelector("#display");
 const buttonsDigits = document.querySelectorAll("button.digit");
 const buttonDecimal = document.querySelector("#decimal");
@@ -61,17 +63,20 @@ buttonClear.addEventListener("click", () =>
     previousOperator = "";
     currentOperator = "+";
     displayCalculator.textContent = 0;
+    beginning = true;
 })
 
 // Need to finish the "equals" steps below
 buttonEquals.addEventListener("click", () =>
 {
     previousOperator = currentOperator;
+    currentOperator = "+";
+    console.log(previousOperator);
     runningTotal = operate(runningTotal, previousOperator, nextNumber);
     nextNumber = "";
     display = runningTotal;
-    runningTotal = 0;
     displayCalculator.textContent = display;
+    
     return display;
 })
 
