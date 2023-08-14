@@ -18,8 +18,6 @@ buttonsDigits.forEach((button) =>
 {
     button.addEventListener("click", () =>
     {
-        //document.querySelectorAll("button.operator").disabled = false;
-
         nextNumber = nextNumber + button.textContent;
         nextNumber = Number(nextNumber);
         console.log("nextNumber is " + nextNumber);
@@ -31,6 +29,7 @@ buttonsDigits.forEach((button) =>
 // In progress (need to freeze buttons)
 buttonsOperators.forEach((button) =>
 {  
+    button.setAttribute("disabled", true);
     button.addEventListener("click", () =>
     {
         previousOperator = currentOperator;
