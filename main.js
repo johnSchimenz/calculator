@@ -4,7 +4,10 @@ let runningTotal = 0;
 let nextNumber = "";
 let previousOperator = "";
 let currentOperator = "";
-const numberOfOperators = 5;
+const arrayOperatorId = ["#division", "#multiply", "#subtract", "#add", "#equals"];
+const lengthArrayOperatorId = arrayOperatorId.length;
+const arrayDigitId = ["#zero", "#one", "#two", "#three", "#four", "#five", "#six", "#seven", "#eight", "#nine", "#decimal"];
+const lengthArrayDigitId = arrayDigitId.length;
 
 const displayCalculator = document.querySelector("#display");
 const buttonsDigits = document.querySelectorAll("button.digit");
@@ -18,6 +21,10 @@ buttonsDigits.forEach((button) =>
 {
     button.addEventListener("click", () =>
     {
+        for (let i = 0; i < lengthArrayOperatorId; i++)
+        {
+            document.querySelector(arrayOperatorId[i]).removeAttribute("disabled");
+        }
         nextNumber = nextNumber + button.textContent;
         nextNumber = Number(nextNumber);
         console.log("nextNumber is " + nextNumber);
@@ -31,7 +38,11 @@ buttonsOperators.forEach((button) =>
 {  
     button.setAttribute("disabled", true);
     button.addEventListener("click", () =>
-    {
+    {        
+        for (let i = 0; i < lengthArrayOperatorId; i++)
+        {
+            document.querySelector(arrayOperatorId[i]).setAttribute("disabled", true);
+        }
         previousOperator = currentOperator;
         console.log("previousOperator is " + previousOperator);
         currentOperator = button.textContent;
