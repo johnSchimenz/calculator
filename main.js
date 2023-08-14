@@ -33,7 +33,7 @@ buttonsDigits.forEach((button) =>
     });
 });
 
-// In progress (need to freeze buttons)
+// Semi-Done
 buttonsOperators.forEach((button) =>
 {  
     button.setAttribute("disabled", true);
@@ -48,7 +48,7 @@ buttonsOperators.forEach((button) =>
         currentOperator = button.textContent;
         console.log("currentOperator is " + currentOperator);
 
-        // previousOperator is "" (beginning)
+        // previousOperator is "" (beginning) - DONE
         if (previousOperator === "")
         {
             runningTotal = nextNumber;
@@ -59,9 +59,13 @@ buttonsOperators.forEach((button) =>
             return runningTotal;
         }
 
-        // previousOperator is an operation and currentOperator is "="
+        // previousOperator is an operation and currentOperator is "=" - DONE
         else if (previousOperator !== "=" && previousOperator !== "" && currentOperator === "=")
         {
+            for (let i = 0; i < lengthArrayDigitId; i++)
+            {
+                document.querySelector(arrayDigitId[i]).setAttribute("disabled", true);
+            }           
             runningTotal = operate(runningTotal, previousOperator, nextNumber);
             displayCalculator.textContent = runningTotal;
             console.log("runningTotal is " + runningTotal);
@@ -70,7 +74,8 @@ buttonsOperators.forEach((button) =>
             return runningTotal;
         }
         
-        // previousOperator is "=" and currentOperator is an operation
+        /*
+        // previousOperator is "=" and currentOperator is an operation - DONE
         else if (previousOperator === "=" && currentOperator !== "=" && currentOperator !== "")
         {
             displayCalculator.textContent = runningTotal;
@@ -78,7 +83,7 @@ buttonsOperators.forEach((button) =>
             return runningTotal;
         }
 
-        // both previousOperator and currentOperator are both "="
+        // both previousOperator and currentOperator are both "=" - DONE
         else if (previousOperator === "=" && currentOperator === "=")
         {
             displayCalculator.textContent = runningTotal;            
@@ -86,7 +91,7 @@ buttonsOperators.forEach((button) =>
             return runningTotal;
         }
         
-        // two of the following operations: + - * /
+        // two of the following operations: + - * / - DONE
         else 
         {
             runningTotal = operate(runningTotal, previousOperator, nextNumber);
@@ -96,26 +101,17 @@ buttonsOperators.forEach((button) =>
             nextNumber = "";
             return runningTotal;
         }
+        */
     });
 });
-
-/*
-// Does not work yet; don't worry until get everything else working
-buttonDecimal.addEventListener("click", () =>
-{
-    // display puts on a decimal if none currently written, but if there is one, nothing happens
-    // return nextNumber
-    if (nextNumber.includes(".") === false)
-    {
-        nextNumber = nextNumber + ".";
-        return nextNumber;
-    }
-})
-*/
 
 // DONE
 buttonClear.addEventListener("click", () => 
 {
+    for (let i = 0; i < lengthArrayDigitId; i++)
+    {
+        document.querySelector(arrayDigitId[i]).removeAttribute("disabled");
+    } 
     display = "";
     runningTotal = 0;
     nextNumber = "";
