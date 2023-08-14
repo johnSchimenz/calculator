@@ -98,7 +98,7 @@ buttonDecimal.addEventListener("click", () =>
     }
 })
 
-//DONE
+// DONE
 buttonClear.addEventListener("click", () => 
 {
     display = "";
@@ -109,7 +109,7 @@ buttonClear.addEventListener("click", () =>
     displayCalculator.textContent = runningTotal;
 })
 
-// Perform operation - functions work by themselves
+// Perform operation - DONE
 function operate(numberA, operator, numberB)
 {
     if (operator === "+")
@@ -130,7 +130,7 @@ function operate(numberA, operator, numberB)
     }
 }
 
-// Operator functions - functions work by themselves
+// Operator functions - DONE
 function add (numberA, numberB)
 {
     return numberA + numberB;
